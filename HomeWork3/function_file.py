@@ -21,3 +21,10 @@ def pair_multiplication (new_list, list_pair_multiplication = []):
             else:
                 list_pair_multiplication.append (new_list[i]*new_list[-1-i])
     return list_pair_multiplication
+
+def binary (number, binary_list = []):
+    while number>0:
+        binary_list.insert(0, int(number%2))
+        number = int(number/2)
+    return binary_list
+    
