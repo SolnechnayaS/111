@@ -8,4 +8,4 @@ print("Задача 3. Напишите программу, которая бу�
 n = int(input("Введите число: "))
 
 new_list = function_file.binary(n)
-print(new_list)
+print(''.join(new_list))
