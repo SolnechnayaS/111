@@ -1,4 +1,5 @@
 from random import sample
+import random
 
 def random_list (len_list):
     new_list = sample (range (1, len_list ** 2), k=len_list)
@@ -27,4 +28,26 @@ def binary (number, binary_list = []):
         binary_list.insert(0, int(number%2))
         number = int(number/2)
     return binary_list
+
+
+def random_list_float (len_list, list_float = []):
+    for i in range (len_list):
+        list_float.append (round(float(random.random())*10, 2))
+    return list_float
+
+def fractional_part (list_float):
+    n = len(list_float)
+    list_fractional_part = []
+    min = float(list_float[0]) - int(list_float[0])
+    max = float(list_float[0]) - int(list_float[0])
+    
+    for i in range (n):
+        a = float(list_float[i]) - int(list_float[i])
+        list_fractional_part.append(a)
+        if a > max:
+            max = a
+        elif a < min:
+            min = a
+    print (f'Min: {round(min,2)}, Max: {round(max, 2)}. Difference: {round(max-min,2)}')
+
     
