@@ -1,6 +1,8 @@
 from random import sample
 import random
 import copy
+from decimal import Decimal, getcontext
+
 
 def random_list (len_list):
     new_list = sample (range (1, len_list ** 2), k=len_list)
@@ -82,3 +84,8 @@ def list_unique_elements (first_list):
             list_unique_elements.remove(first_list[i])
 
     return list_unique_elements
+
+def decimal_num (number, precision):
+    number_dec = number.quantize(Decimal(precision))
+    
+    return number_dec
