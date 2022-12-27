@@ -2,10 +2,16 @@ from random import sample
 import random
 import copy
 from decimal import Decimal, getcontext
+import function_file
 
 
 def random_list (len_list):
     new_list = sample (range (1, len_list ** 2), k=len_list)
+    return new_list
+
+def random_ratio (len_list):
+    temp_list = list(range(-10, 10))+list(range(-10, 10))+list(range(-10, 10))
+    new_list = sample (temp_list, k=len_list+1)
     return new_list
 
 def sum_odd (new_list):
@@ -89,3 +95,38 @@ def decimal_num (number, precision):
     number_dec = number.quantize(Decimal(precision))
     
     return number_dec
+
+def random_polynomial (k, name):
+    random_ratio_list = function_file.random_ratio (k)
+    temp = random_ratio_list.copy()
+    temp.reverse()
+    print(f'Коффициенты использумые в многочлене {temp}, сам многочлен записан в файле {name}')
+    with open (name, "a", encoding="utf-8") as polynomial:
+        polynomial_list = []
+        for i in range (2):
+            if random_ratio_list[i] ==1:
+                if i == 0:
+                    polynomial_list.insert(0, f"{random_ratio_list[i]}")
+                elif i == 1:
+                    polynomial_list.insert(0, f"х")
+            elif random_ratio_list[i] !=0:
+                if i == 0:
+                    polynomial_list.insert(0, f"{random_ratio_list[i]}")
+                elif i == 1:
+                    polynomial_list.insert(0, f"{random_ratio_list[i]}х")
+        for i in range (2, k+1):
+            if random_ratio_list[i] == 1:
+                polynomial_list.insert(0, f"x^{i}")
+            elif random_ratio_list[i] !=0:
+                polynomial_list.insert(0, f"{random_ratio_list[i]}x^{i}")
+        polynomial.writelines(f'{"+".join(polynomial_list).replace("+-","-")}=0\n')
+
+def temp_name (number):
+    match number:
+        case 1:
+            name = str('poly.txt')
+        case 2:
+            name = str('poly2.txt')
+        case _:
+            name = str(input("Введите имя файла для записи: "))
+    return name
